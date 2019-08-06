@@ -32,7 +32,7 @@ export default class Map extends Component {
                     "type": "geojson",
                     "data": this.state.data
                 },
-                "point": {
+                "paint": {
                     "circle-radius": 5,
                     "circle-color": "#B4D455"  //todo: circle-color not working
                 }
@@ -40,9 +40,22 @@ export default class Map extends Component {
         });
 
         map.on('click', 'points', (e) => {
-             const coordinates = e.features[0].geometry.coordinates.slice();
-             const { details, description, impact, duration } = e.features[0].properties;
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const { details, description, impact, duration } = e.features[0].properties;
 
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new MapboxGL.Popup()
+                .setLngLat(coordinates)
+                .setHTML(`
+                <strong>${description}</strong><br />
+                <em>${impact}</em><br />
+                <em>${duration}</em><br />
+                <p>${details}</p>
+                `)
+                .addTo(map);
         });
 
         this.setState({ map });
