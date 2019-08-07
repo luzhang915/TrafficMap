@@ -11,7 +11,6 @@ export default class Map extends Component {
                 zoom: 10,
                 center: [ -113.4989, 53.5444 ]
             },
-            //data: null,
         };
     }
 
