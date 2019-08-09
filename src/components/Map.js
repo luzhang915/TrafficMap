@@ -32,7 +32,7 @@ export default class Map extends Component {
                 },
                 "paint": {
                     "circle-radius": 7,
-                    "circle-color": "#B4D455"  //todo: circle-color not working
+                    "circle-color": "#B4D455"
                 }
             })
         });
@@ -73,13 +73,9 @@ export default class Map extends Component {
         else return null;
     }
 
-    componentDidMount() {
-        const { data, api_url } = this.state;
-    }
-
     render() {
         return (
-            <div style={{ width: 1100, height: 600 }} id="map" />
+            <div style={{width: 1100, height: 600}} id="map" />
         );
     }
 }
